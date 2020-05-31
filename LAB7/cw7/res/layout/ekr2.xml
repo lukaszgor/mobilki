@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <GridLayout
+        android:id="@+id/gridLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="93dp"
+        android:columnCount="1" >
+
+        <Button
+            android:id="@+id/button1xd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="0"
+            android:layout_gravity="left|top"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="42dp"
+            android:layout_row="1"
+            android:text="Start" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_column="0"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_row="1"
+            android:text="Stop" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_column="0"
+            android:layout_gravity="right|bottom"
+            android:layout_row="1"
+            android:text="Czysc" />
+
+    </GridLayout>
+
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/textView1"
+        android:ems="10" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/gridLayout1"
+        android:layout_marginTop="24dp"
+        android:layout_toRightOf="@+id/editText1"
+        android:text="TextView" />
+
+</RelativeLayout>

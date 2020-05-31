@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="android.view.View.OnClickListener"/>
+<fullyQualifiedTypeName name="android.view.View"/>
+<fullyQualifiedTypeName name="android.content.pm.LabeledIntent"/>
+<fullyQualifiedTypeName name="android.widget.Button"/>
+<fullyQualifiedTypeName name="android.widget.TextView"/>
+<fullyQualifiedTypeName name="com.example.cw5.R.id"/>
+<fullyQualifiedTypeName name="android.view.animation.Animation"/>
+<fullyQualifiedTypeName name="android.view.animation.RotateAnimation"/>
+<fullyQualifiedTypeName name="android.widget.ImageView"/>
+<fullyQualifiedTypeName name="android.view.animation.ScaleAnimation"/>
+<fullyQualifiedTypeName name="android.view.animation.AlphaAnimation"/>
+<fullyQualifiedTypeName name="android.view.animation.TranslateAnimation"/>
+</qualifiedTypeNameHistroy>

@@ -1,0 +1,209 @@
+package com.example.cw8;
+
+import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Rect;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
+
+
+public class MainActivity extends Activity {
+	
+	public AnimacjaSilnik mojeSpirite1;
+	public AnimacjaSilnik mojeSpirite2;
+	public AnimacjaSilnik mojeSpirite3;
+	public long GameTime;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+	}
+	
+	
+	public class MojWatekGlowny extends Thread{
+		private SurfaceHolder WatekPowierzchni;
+		private MySurfaceView PrzedstawPowierzchnie;// samo SurfaceView dziala
+		private boolean WatekDziala=false;
+		
+		public  MojWatekGlowny(SurfaceHolder surfaceHolder,
+				MySurfaceView surfaceView) {
+			
+			WatekPowierzchni=surfaceHolder;
+			PrzedstawPowierzchnie=surfaceView;
+		}
+	
+	
+	public void setRunning(boolean b) { WatekDziala = b; }
+	
+	@Override public void run() {
+		while (WatekDziala) {
+		Canvas c = null;
+		try {
+		GameTime = System.currentTimeMillis() ;
+		c= WatekPowierzchni.lockCanvas(null); synchronized (WatekPowierzchni) {
+			PrzedstawPowierzchnie.onDraw(c);
+		}
+		} finally {
+		if (c != null) {
+			WatekPowierzchni.unlockCanvasAndPost(c);
+		}
+		}
+		}
+	}
+
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle action bar item clicks here. The action bar will
+		// automatically handle clicks on the Home/Up button, so long
+		// as you specify a parent activity in AndroidManifest.xml.
+		int id = item.getItemId();
+		if (id == R.id.action_settings) {
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+	
+
+	public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback {
+		private MojWatekGlowny thread;
+	}
+	
+	
+	@Override
+	protected void onDraw(Canvas canvas) {
+		canvas.drawColor(Color.BLACK);
+		mojSpritel.Update(GameTime) ;
+		mojSprite2.Update(GameTime) ;
+		mojSprite3.Update(GameTime) ;
+		mojSpritel.draw(canvas); mojSprite2.draw(canvas); mojSprite3.draw(canvas);
+	}
+		public MySurfaceView(Context context) {
+		super(context) ;
+		init();
+		}
+
+		
+		
+		private void init() {
+			getHolder().addCallback(this) ;
+			thread = new MojWatekGlowny(getHolder(), this); // create a graphic 
+			mojSpritel new AnimacjaSilnik();
+			mojsprite2 new Animacjasilnik(); 
+			mojSprite3 = new AnimacjaSilnik();
+			mojSpritel. init (BitmapFactory .decodeResource(getResources(), R.drawable.mario), 95, 60, 8, 3); 
+			mojSprite2. init (BitmapFactory .decodeResource(getResources(), R.drawable.mario), 95, 60, 8, 3); 
+			mojSprite3. init (BitmapFactory.decodeResource(getResources(), R.drawable.mario), 95, 60, 8, 3);
+		}
+		
+		
+		
+		@Override
+		public void surfaceChanged(SurfaceHolder arg0, int argl, int arg2, int arg3) {
+		}
+			@Override
+			public void surfaceCreated(SurfaceHolder holder) {
+			thread.setRunning(true) ;
+			thread.start();
+			}
+			@Override
+			public void surfaceDestroyed(Surfacetolder holder) {
+			boolean retry = true; 
+			thread.setRunning(false) ;
+			while (retry) {
+			try {
+			thread.join(); retry = false; 
+			} catch (InterruptedException e) {
+			}
+			}
+			}
+
+
+			public class AnimacjaSilnik {
+				private Bitmap mAnimacja; 
+				private int mXPos; 
+				private int mYPos; 
+				private Rect mRamka; 
+				private int mFPS; 
+				private int mNrRamek; 
+				private int mAktualnaRamka;
+				private long mLicznikRamek;
+				private int mSpritewysokosc;
+				private int mSpriteSzerokosc;
+				public AnimacjaSilnik() {
+				mRamka = new Rect(0, 0, 0, 0); 
+				mLicznikRamek = 0; 
+				mAktualnaRamka = 0;
+				mXPos = 50;
+				mYPos = 50;
+				}
+				public void init(Bitmap theBitmap, int Height, int Width, int theFPS, int theFrameCount)
+				{
+					mAnimacja = theBitmap; 
+				mSpritewysokosc = Height;
+				mSpriteSzerokosc = Width;
+				mRamka.top = 3;
+				mRamka.bottom =mSpritewysokosc;
+				mRamka.left =0 ; 
+				mRamka.right = mSpriteSzerokosc;
+				mFPS = 1000 / theFPS;
+				mNrRamek = theFrameCount;	
+			
+				}
+		
+			
+			
+			public void Update(long GameTime) {
+				if(GameTime>mLicznikRamek +mFPS) {
+					mLicznikRamek = GameTime;
+					mAktualneRamka +=1;
+					if(mAktulaneRamka>=mNrRamek) {
+						mAktulaneRamka=0;
+					}
+				}
+				
+				mRamka.left =mAktulaneRamka*mSpiriteSzerokosc;
+				mRamka.right =mRamka.left+mSpiriteSzerokosc;
+			}
+			
+			public void draw(Canvas canvas) {
+				Rect dest=new Rect(getXPos(),getYPos(),getXPos()+mSpiriteSzerokosc,getYPos()+mSpiriteWysokosc);
+				canvas.drawBitmap(mAnimacja, mRamka, dest,null);
+			}
+			
+			public int getYPos() {
+				return mYPos;
+			}
+			public int getXPos() {
+				return mXPos;
+			}
+			
+			}
+			
+}
+			
+
+
+
+
+
+
+
+
+
+
+

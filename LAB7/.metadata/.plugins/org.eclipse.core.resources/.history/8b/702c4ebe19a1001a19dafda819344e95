@@ -1,0 +1,17 @@
+package com.example.cw7;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.View.OnClickListener;
+import android.widget.Toast;
+
+public class druga extends Activity implements OnClickListener {
+	protected void onCreate(Bundle savedinstanceState) {
+		super.onCreate(savedinstanceState);
+		setContentView(R.layout.ekr2);
+		Toast.makeText(getBaseContext(), "za³adowano poprawnie klase 2", Toast.LENGTH_SHORT).show();
+	}
+}
+
+
+

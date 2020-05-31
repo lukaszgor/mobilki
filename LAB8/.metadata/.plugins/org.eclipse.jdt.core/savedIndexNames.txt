@@ -1,0 +1,2 @@
+INDEX VERSION 1.131+C:\Users\ASUS\Desktop\STUDIA INFORMATYKA WE PCZ\AKTUALNY SEMESTR\PROGRAMOWANIE MOBILNE\DomoweCwiczenia\LAB8\.metadata\.plugins\org.eclipse.jdt.core
+2725400016.index

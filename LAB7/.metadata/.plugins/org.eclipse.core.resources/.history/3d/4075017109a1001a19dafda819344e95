@@ -1,0 +1,11 @@
+package com.example.cw7;
+
+
+import android.app.Activity;
+import android.os.Bundle;
+
+public class pierwsza extends Activity {
+protected void onCreate(Bundle savedinstanceState) {
+	
+}
+}
